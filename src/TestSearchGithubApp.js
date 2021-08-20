@@ -15,7 +15,12 @@ class SearchPage extends Component {
 
 
   handleSearch = async event => {
-    var results = await Services.searchGithub(event.target.value).catch(error=> {this.setState({ searchError: true })});
+    var criteria = event.target.value;
+    if (!criteria || criteria.length === 0) {
+      this.setState({ itemList: [], searchError: false })
+      return;
+    }
+    var results = await Services.searchGithub(criteria).catch(error=> {this.setState({ searchError: true })});
     if (results) {
       var itemList = results.map(item => {
         return { ...item, text: item.login, checked: false }
@@ -53,7 +58,7 @@ class SearchPage extends Component {
 
 
   render() {
-    const todoItemComponents = this.state.itemList.map(item => {
+    const resultComponents = this.state.itemList.map(item => {
       return (
         <ItemList key={item.id} item={item} handleChange={this.handleChange} />
       );
@@ -71,7 +76,7 @@ class SearchPage extends Component {
         {(this.state.searchError === true) &&
           <span>A technical error occured while searching</span>
         }
-        <div>{todoItemComponents}</div>
+        <div>{resultComponents}</div>
       </div>
     );
   }
