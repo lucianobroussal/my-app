@@ -67,38 +67,25 @@ function fizzBuzzWhile(size) {
   return result;
 }
 
-// function incrementArrayDigit(arrayOfDigit){
-
-//   var arraySize = arrayOfDigit.length;
-
-//   if(arraySize > arrayOfDigit.length || size ===0){
-//     return arrayOfDigit;
-//   }
-//   arrayOfDigit[arraySize-1]++;
-
-//   return incrementArrayDigit(arrayOfDigit) 
-
-// }
 
 
-function increment(fourDigits) {
-  for (var i = fourDigits.length - 1; i >= 0; i--) {
-    fourDigits[i]++; // increment the current digit
+
+function increment(arrayOfDigit) {
+  for (var i = arrayOfDigit.length - 1; i >= 0; i--) {
+    arrayOfDigit[i]++; // increment the current digit
     if (i > -1) { // the new value, if not the first value
-      fourDigits[i] %= 10;
+      arrayOfDigit[i] %= 10;
     }
-    if (fourDigits[i] > 0) {
+    if (arrayOfDigit[i] > 0) {
       // We have incremented +1 the array of digit. goal done. stop iterating
       break;
     }
     //special case,  if array needs to be enlarged eg: 9999 -> 10000
-    if (i === 0 && fourDigits[i] === 0) {
-      fourDigits = [1, ...fourDigits]
+    if (i === 0 && arrayOfDigit[i] === 0) {
+      arrayOfDigit = [1, ...arrayOfDigit]
     }
-
-
   }
-  return fourDigits;
+  return arrayOfDigit;
 }
 
 
@@ -132,12 +119,17 @@ function TestAlgoApp() {
       <header className="App-header">
         <span>FizzBuzz output Count {FIZZBUZZSIZE}</span>
         <span>FizzBuzz(Continue)</span>
+        <br/>
         <span className="App-FizzBuzzLog">{uiFizzBuzzContinue}</span>
         <span>FizzBuzz (IfElse)</span>
+        <br/>
         <span className="App-FizzBuzzLog">{uiFizzBuzzIfElse}</span>
         <span>FizzBuzz (While)</span>
+        <br/>
         <span className="App-FizzBuzzLog">{uiFizzBuzzWhile}</span>
+        <br/> <br/> <br/>
         <span>Increment Array</span>
+        <br/>
         <span className="App-FizzBuzzLog">{uiIncrementedArray}</span>
       </header>
     </div>
